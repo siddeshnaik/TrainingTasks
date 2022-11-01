@@ -2,6 +2,7 @@ package com.example.recyclerview2
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,26 +14,30 @@ class MainActivity : AppCompatActivity() {
     private var adapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>? = null
 
     lateinit var binding: ActivityMainBinding
+    lateinit var manager: RecyclerView.LayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+//        setContentView(R.layout.activity_main)
 
 //        layoutManager = LinearLayoutManager(this)
 
+//        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+//        recyclerView.layoutManager = layoutManager
+//
+//        adapter = RecyclerAdapter()
+//        recyclerView.adapter = adapter
 
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
+        manager = LinearLayoutManager(this)
 
+        binding.recyclerView.apply {
 
+            adapter = RecyclerAdapter()
+            layoutManager = manager
 
-        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = layoutManager
-        
-        adapter = RecyclerAdapter()
-        recyclerView.adapter = adapter
-
-
-
-
+        }
     }
 }
