@@ -1,5 +1,7 @@
 package com.example.recyclerview2
 
+import android.annotation.SuppressLint
+import android.provider.ContactsContract
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -7,12 +9,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.contentValuesOf
 import androidx.recyclerview.widget.RecyclerView
 
 @Suppress("DEPRECATION")
 class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
-    
+
     private var titles = arrayOf("One", "Two", "Three", "Four",
         "Five", "Six", "Seven",
         "Eight", "Nine", "Ten",
@@ -71,6 +74,7 @@ class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
 
             }
+
 
 
 

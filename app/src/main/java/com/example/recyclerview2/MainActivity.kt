@@ -1,12 +1,22 @@
 package com.example.recyclerview2
 
+import android.annotation.SuppressLint
+import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract
+import android.provider.ContactsContract.Contacts
+import android.util.Log
 import android.view.LayoutInflater
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
+import androidx.core.content.PackageManagerCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerview2.databinding.ActivityMainBinding
+import java.util.jar.Manifest
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,6 +28,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+//        getContacts()
+
+
 //        setContentView(R.layout.activity_main)
 
 //        layoutManager = LinearLayoutManager(this)
@@ -40,4 +54,37 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
+
+    @SuppressLint("Range")
+    fun getContacts(){
+
+
+
+
+        val cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null)
+
+//        val dataTransferMap = HashMap<>
+        if(cursor!=null && cursor.moveToFirst())
+            do{
+                val name= cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
+                val name1 = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
+                val number = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+//
+//
+//                val contactList : MutableList<String> = ArrayList()
+
+                Log.i("getContacts", "name : $number")
+
+
+
+
+
+            }while (cursor.moveToNext())
+        cursor?.close()
+    }
+
+
+
+
+
 }
