@@ -15,21 +15,15 @@ import androidx.recyclerview.widget.RecyclerView
 @Suppress("DEPRECATION")
 class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
+    private val contactInfo: ArrayList<PhoneContactData> = ArrayList()
 
-    private var titles = arrayOf("One", "Two", "Three", "Four",
-        "Five", "Six", "Seven",
-        "Eight", "Nine", "Ten",
-        "Eleven", "Twelve", "Thirteen")
 
-    private var details= arrayOf("Item 1", "Item 2", "Item 3","Item 4",
-        "Item 5", "Item 6","Item 7",
-        "Item 8", "Item 9","Item 10",
-        "Item 11", "Item 12","Item 13",)
+    fun setContactInfo(ContactInfoData: List<PhoneContactData>){
+        contactInfo.clear()
+        contactInfo.addAll(ContactInfoData)
+        notifyDataSetChanged()
 
-    private val images = intArrayOf(R.drawable.folder,R.drawable.folder,R.drawable.folder,R.drawable.folder,
-        R.drawable.folder,R.drawable.folder,R.drawable.folder,
-        R.drawable.folder,R.drawable.folder,R.drawable.folder,
-        R.drawable.folder,R.drawable.folder,R.drawable.folder)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.card_layout,parent, false)
@@ -40,15 +34,15 @@ class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerAdapter.ViewHolder, position: Int) {
 
-        holder.itemTitle.text = titles[position]
-        holder.itemDetail.text = details[position]
-        holder.itemImage.setImageResource(images[position])
+        holder.itemTitle.text = contactInfo[position].contactName
+        holder.itemDetail.text = contactInfo[position].contactNumber
+//        holder.itemImage.setImageResource(contactInfo[position].)
 
         Log.i("onBindViewHolder", "Its Running")
     }
 
     override fun getItemCount(): Int {
-        return titles.size
+        return contactInfo.size
 
     }
 
@@ -65,11 +59,12 @@ class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
             Log.i("inner class ViewHolder", "Its Running")
 
 
+
             itemView.setOnClickListener {
                 val position: Int = adapterPosition
 
-                Toast.makeText(itemView.context,"You Clicked on ${titles[position]}", Toast.LENGTH_SHORT).show()
-                Log.i("Clicked on a folder", "${titles[position]}")
+                Toast.makeText(itemView.context,"You Clicked on ${contactInfo[position].contactName}", Toast.LENGTH_SHORT).show()
+                Log.i("Clicked on a folder", "${contactInfo[position].contactName}")
 
 
 
