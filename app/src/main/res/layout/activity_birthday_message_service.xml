@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".afterNotification"
+  android:orientation="vertical"
+  android:background="@drawable/birthday_bg"
+  android:layout_margin="3dp"
+  android:id="@+id/LinearLayout1"
+  >
+
+  <TextView
+    android:id="@+id/textView1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:text="A Very Happy Birthday"
+    android:textSize="35dp"
+    android:textStyle="bold"
+    android:textColor="@color/white"
+    android:gravity="center_vertical|center_horizontal"
+    android:layout_marginTop="340dp"
+    />
+
+  <TextView
+    android:id="@+id/textView2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    tools:text="Siddesh"
+    android:textSize="35dp"
+    android:textStyle="bold"
+    android:textColor="@color/white"
+    android:gravity="center_vertical|center_horizontal"
+    />
+
+  <ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:src="@drawable/birthday_bg"
+    android:id="@+id/imageView1"
+
+    />
+
+
+
+</LinearLayout>
