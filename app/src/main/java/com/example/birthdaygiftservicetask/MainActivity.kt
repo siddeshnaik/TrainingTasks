@@ -23,11 +23,6 @@ import android.widget.RemoteViews
 import android.widget.Toast
 import com.example.birthdaygiftservicetask.Constants.USER_NAME
 
-
-
-
-
-
 class MainActivity : AppCompatActivity() {
 
     lateinit var notificationChannel: NotificationChannel
@@ -37,11 +32,6 @@ class MainActivity : AppCompatActivity() {
     private val channelId = "Siddesh App"
     private var description = "Test Notification"
 
-
-
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -49,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         val btn = findViewById<Button>(R.id.btn_start)
         val btn_stop = findViewById<Button>(R.id.btn_stop)
 
-        val userName : EditText = findViewById(R.id.et_name)
+        val userName: EditText = findViewById(R.id.et_name)
 
 
 
@@ -59,14 +49,11 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        btn.setOnClickListener{
+        btn.setOnClickListener {
 
-
-
-            if (userName.text.isEmpty()){
+            if (userName.text.isEmpty()) {
                 Toast.makeText(this, "Please enter your name", Toast.LENGTH_LONG).show()
-
-            }else{
+            } else {
 
                 val intent = Intent(this, BirthdayMessageService::class.java)
                 intent.putExtra("UserName", userName.text.toString())
@@ -117,24 +104,8 @@ class MainActivity : AppCompatActivity() {
 
                 notificationManager.notify(1234, builder.build())
                 Log.i("Notification", "Notificaion Ran")
-
             }
 
-
-
-
-
-
-
-
         }
-
-
-        }
-
-
-
-
-
-
- }
+    }
+}
