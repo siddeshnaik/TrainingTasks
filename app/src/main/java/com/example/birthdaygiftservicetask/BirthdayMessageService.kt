@@ -29,7 +29,7 @@ class BirthdayMessageService : AppCompatActivity() {
         textView2.text = userName + "!!!!"
 
         if(userName=="Anukeerti"){
-            imageView1.setImageResource(R.drawable.anu_photo)
+            imageView1.setImageResource(R.drawable.birthday_cake)
         }
 
 
