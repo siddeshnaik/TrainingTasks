@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         var helper = MyHelper(applicationContext)
         var db: SQLiteDatabase = helper.readableDatabase
-        var rs = db.rawQuery("SELECT * FROM SIDDESH", null)
+        var rs = db.rawQuery("SELECT * FROM SIDDESH", null) 
 //        if(rs.moveToFirst()){
 //            Toast.makeText(applicationContext, rs.getString(1)+"\n"+rs.getString(2), Toast.LENGTH_LONG).show()
 //        }
