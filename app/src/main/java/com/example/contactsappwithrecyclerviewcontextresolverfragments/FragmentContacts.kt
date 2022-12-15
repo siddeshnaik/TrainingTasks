@@ -5,10 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import kotlin.coroutines.CoroutineContext
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,9 +27,14 @@ private const val ARG_PARAM2 = "param2"
  * Use the [Fragment_Contacts.newInstance] factory method to
  * create an instance of this fragment.
  */
-class FragmentContacts : Fragment() {
+class FragmentContacts : Fragment(), CoroutineScope {
 
 //    val contactInfo: ArrayList<PhoneContactData> = ArrayList()
+
+    private lateinit var job: Job
+
+    override val coroutineContext: CoroutineContext
+        get() = job + Dispatchers.Main
 
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>? = null
@@ -31,9 +43,11 @@ class FragmentContacts : Fragment() {
     lateinit var layoutInflated: View
 
     val contactHelper by lazy { ContactHelper() }
-    val phoneContactsData by lazy {
-        contactHelper.getContactList(requireContext())
-    }
+//    val phoneContactsData by lazy {
+//        contactHelper.getContactList(requireContext())
+//    }
+
+    var phoneData = ArrayList<PhoneContactData>()
 
     private var param1: String? = null
     private var param2: String? = null
@@ -44,7 +58,15 @@ class FragmentContacts : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+        job = Job()
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        job.cancel()
+    }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,18 +77,29 @@ class FragmentContacts : Fragment() {
         return layoutInflated
     }
 
+    private suspend fun contactHelperGetData() :ArrayList<PhoneContactData> {
+        return withContext(Dispatchers.IO){contactHelper.getContactList(requireContext())}
+
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recycler_view = layoutInflated.findViewById(R.id.recyclerViewContacts)
-        recycler_view.apply {
-            layoutManager = LinearLayoutManager(activity)
+        launch {
+            phoneData = contactHelperGetData()
+            recycler_view = layoutInflated.findViewById(R.id.recyclerViewContacts)
+            recycler_view.apply {
+                layoutManager = LinearLayoutManager(activity)
 
-            adapter = RecyclerAdapter().apply {
-                setContactInfo(phoneContactsData)
+                adapter = RecyclerAdapter().apply {
+                    setContactInfo(phoneData)
 
+                }
             }
+
         }
+
+
     }
 
     companion object {

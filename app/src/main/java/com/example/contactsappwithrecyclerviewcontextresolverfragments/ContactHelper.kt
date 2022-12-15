@@ -11,8 +11,10 @@ import kotlin.concurrent.thread
 
 class ContactHelper {
     @SuppressLint("Range")
-    fun getContactList(context: Context): ArrayList<PhoneContactData> {
+    suspend fun getContactList(context: Context): ArrayList<PhoneContactData> {
         val phoneContactDataFunc = ArrayList<PhoneContactData>()
+
+        Log.i("SiddeshThreads", Thread.currentThread().name)
 
             val cr = context.contentResolver
             val cur: Cursor? = cr.query(
@@ -91,7 +93,7 @@ class ContactHelper {
     }
 
     @SuppressLint("Range")
-    fun getFavContactList(context: Context): ArrayList<PhoneContactData> {
+    suspend fun getFavContactList(context: Context): ArrayList<PhoneContactData> {
 
 
         val phoneContactDataStared = ArrayList<PhoneContactData>()
